@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        input, button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulario de Generación de PDF</h1>
+
+    <!-- Inputs para capturar datos -->
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" placeholder="Ingresa tu nombre">
+
+    <label for="evento">Evento:</label>
+    <input type="text" id="evento" placeholder="Ingresa el nombre del evento">
+
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha">
+
+    <label for="telefono">Teléfono:</label>
+    <input type="tel" id="telefono" placeholder="Ingresa tu teléfono">
+
+    <button onclick="generarPDF()">Generar PDF</button>
+
+    <script>
+        function generarPDF() {
+            // Obtener valores de los inputs
+            const nombre = document.getElementById("nombre").value || "Sin especificar";
+            const evento = document.getElementById("evento").value || "Sin especificar";
+            const fecha = document.getElementById("fecha").value || "Sin especificar";
+            const telefono = document.getElementById("telefono").value || "Sin especificar";
+
+            // Configuración de jsPDF
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+
+            // Agregar texto al PDF
+            pdf.text(20, 20, "Detalles del Evento");
+            pdf.text(20, 30, `Nombre: ${nombre}`);
+            pdf.text(20, 40, `Evento: ${evento}`);
+            pdf.text(20, 50, `Fecha: ${fecha}`);
+            pdf.text(20, 60, `Teléfono: ${telefono}`);
+
+            // Descargar el PDF
+            pdf.save("datos_evento.pdf");
+        }
+    </script>
+</body>
+</html>
